@@ -20,3 +20,12 @@ deactivate
 
 pip install pil
 pip install django_facebook
+
+------------ FOR FACEBOOK -------------
+
+sudo nano /private/etc/hosts
+     * In that file add the line "127.0.0.1       hackbyrd.com" at the bottom
+dscacheutil -flushcache
+
+/* Now navigate to "http://hackbyrd.com:8000/facebook/connect/" to ensure that it worked */
+
