@@ -8,6 +8,33 @@ class UserProfile(models.Model):
 
     # other fields besides generic User fields  
 
+ROOM_CHOICES = (
+    ('Commons', (
+            ("4BR2BA", "4 Bedroom/ 2 Bath"),
+            ("2BR2BA", "2 Bedroom/ 2 Bath"),
+            )
+     ),
+    ('Courtyards', (
+            ("4BR2BA", "4 Bedroom/ 2 Bath"),
+            ('4BR4BA', '4 Bedroom/ 4 Bath'),
+            ('2BR2BA', '2 Bedroom/ 2 Bath'),
+            )
+     ),
+    ('View', (
+            ('2BR2BA', '2 Bedroom/ 2 Bath'),
+            ("4BR2BA", "4 Bedroom/ 2 Bath"),
+            ('4BR4BA', '4 Bedroom/ 4 Bath'),
+            )
+     ),
+    ('Varsity', (
+            ('2BR2BA', '2 Bedroom/ 2 Bath'),
+            ("4BR3BA", "4 Bedroom/ 3 Bath"),
+            ('4BR4BA', '4 Bedroom/ 4 Bath'),
+            ('3BR3BA', '3 Bedroom/ 3 Bathroom'),
+            ('1BR1BA', '1 Bedroom/ 1 Bathroom'),
+            )
+     )
+)
 class Listing(models.Model):
     building = models.ForeignKey('Building')
     room = models.CharField(max_length=50)
@@ -18,7 +45,9 @@ class Listing(models.Model):
     price = models.DecimalField(max_digits=50, decimal_places=2, blank=True)
     negotiable = models.BooleanField(default=True)
     description = models.TextField()
-    #num_rooms = models.IntegerField()
+    num_rooms = models.IntegerField()
+
+    room_type = models.CharField(max_length=30, choices = ROOM_CHOICES)
 
     class Meta:
         ordering = ['-pub_date']
@@ -33,34 +62,7 @@ class Building(models.Model):
     name = models.CharField(max_length = 20, choices = BUILDING_CHOICES)
     website = models.URLField()
     description = models.TextField()
-    ROOM_CHOICES = (
-        ('Commons', (
-                ("4BR2BA", "4 Bedroom/ 2 Bath"),
-                ("2BR2BA", "2 Bedroom/ 2 Bath"),
-                )
-         ),
-        ('Courtyards', (
-                ("4BR2BA", "4 Bedroom/ 2 Bath"),
-                ('4BR4BA', '4 Bedroom/ 4 Bath'),
-                ('2BR2BA', '2 Bedroom/ 2 Bath'),
-                )
-         ),
-        ('View', (
-                ('2BR2BA', '2 Bedroom/ 2 Bath'),
-                ("4BR2BA", "4 Bedroom/ 2 Bath"),
-                ('4BR4BA', '4 Bedroom/ 4 Bath'),
-                )
-         ),
-        ('Varsity', (
-                ('2BR2BA', '2 Bedroom/ 2 Bath'),
-                ("4BR3BA", "4 Bedroom/ 3 Bath"),
-                ('4BR4BA', '4 Bedroom/ 4 Bath'),
-                ('3BR3BA', '3 Bedroom/ 3 Bathroom'),
-                ('1BR1BA', '1 Bedroom/ 1 Bathroom'),
-                )
-         )
-        )
-
+    
     def __unicode__(self):
         return self.name
                 

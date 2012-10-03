@@ -1,4 +1,5 @@
 ------------------------------------ Setup -------------------------------------------
+
 Should run on a virtual environment to make sure it works the same on everyones machines
 To install virtualenv:
 
@@ -17,4 +18,5 @@ deactivate
 
 -------------------------------------------------------------------------------------------
 
-----------
+pip install pil
+pip install django_facebook

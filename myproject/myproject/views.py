@@ -1,6 +1,6 @@
 from django.template import RequestContext, Context, loader
 from django.http import HttpResponse, HttpResponseRedirect
-from listings.models import Listing, Building, ListingForm, ContactForm
+from listing.models import Listing, Building, ListingForm, ContactForm
 from django.shortcuts import get_list_or_404, render
 from django.views.generic import list_detail
 from django.shortcuts import render_to_response
@@ -8,6 +8,14 @@ from django.utils import simplejson
 from django.core import serializers
 
 def home(request):
+    template = loader.get_template('home.html')
+    listings = Listing.objects
+    dict = {"listings": listings}
+    c = RequestContext(request, dict)
+    return HttpResponse(template.render(c))
+
+# Doesn't do anything
+def contact(request):
     template = loader.get_template('home.html')
     listings = Listing.objects
     dict = {"listings": listings}

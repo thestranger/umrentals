@@ -3,6 +3,9 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+FACEBOOK_APP_ID = '256010727834898'
+FACEBOOK_APP_SECRET = '369e81c3ed0f7f0fd9e1cad2f4b0e0f4'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -103,6 +106,8 @@ ROOT_URLCONF = 'myproject.urls'
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
 TEMPLATE_DIRS = (
+    'templates',
+    'templates/django_facebook',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -116,13 +121,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'listing',
+    'django_facebook',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
-AUTH_PROFILE_MODULE = 'listing.UserProfile'
+AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -152,3 +158,19 @@ LOGGING = {
         },
     }
 }
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django_facebook.context_processors.facebook',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django_facebook.auth_backends.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
